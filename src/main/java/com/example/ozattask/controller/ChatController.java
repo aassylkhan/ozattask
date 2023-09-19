@@ -20,7 +20,6 @@ public class ChatController {
 
     private final ChatService chatService;
     private final UserService userService;
-    private AvatarGenerator avatarGenerator;
 
     @GetMapping("/{chatId}")
     public String getChat(@PathVariable Long chatId, Model model) {
@@ -29,7 +28,7 @@ public class ChatController {
         model.addAttribute("messageRequestDto", new SendMessageRequestDto());
 
         // Avatar
-        String username = String.valueOf(userService.getCurrentUser().getUsername());
+        String username = userService.getCurrentUser().getUsername();
         String avatarStyle = AvatarGenerator.generateAvatar(username);
         model.addAttribute("avatarStyle", avatarStyle);
 
